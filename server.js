@@ -8,8 +8,8 @@
 -Tramite la funzione.map(), creare un nuovo array dove per ogni elemento dell’array di oggetti viene creata un istanza della classe Movie o TvSerie in base al type e salvata nel nuovo array.
 -Creiamo una funzione che restituisca la media dei voti di tutti i film per un determinato genere.Prevedere un argomento per la lista dei film ed uno per il genere.
 -Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
-Creiamo una funzione che filtri i film in base ad un genere passato come argomento e ne ritorni un array con all’interno il risultato della funzione toString() di ogni film.
-Eseguire tutto il codice da terminale tramite NodeJs e stampiamo nel terminale il risultato delle varie funzioni.
+-Creiamo una funzione che filtri i film in base ad un genere passato come argomento e ne ritorni un array con all’interno il risultato della funzione toString() di ogni film.
+-Eseguire tutto il codice da terminale tramite NodeJs e stampiamo nel terminale il risultato delle varie funzioni.
     BONUS:
 Rendere le proprietà delle classi private e creare dei setter e dei getter per potervi accedere.
 Creare una classe Cart dove poter salvare i film che si intende noleggiare.Tramite delle funzioni, poter aggiungere o togliere dei film dal carrello.Creare poi una funzione che stampi il costo totale dei film da noleggiare, dove per ogni film occorre specificare un prezzo fisso di 3.99 */
@@ -99,9 +99,10 @@ class Movie {
     // Funzione per mostrare una stringa
     toString() {
         const { title, type, genre, year, rating, seasons } = this;
-        return `${title} è una ${type === 'movie' ? 'film' : 'serie TV'} di genere ${genre}. È stato rilasciato nel ${year} ed ha un voto di ${rating} ${type === 'movie' ? ' ' : `e ha ${ seasons }} stagioni.`}`;
+        return `${title} è una ${type === 'movie' ? 'film' : 'serie TV'} di genere ${genre}. È stato rilasciato nel ${year} ed ha un voto di ${rating}${type === 'movie' ? '' : ` e ha ${ seasons } stagioni.`}`;
     }
 }
+
 
 
 
@@ -149,7 +150,7 @@ const search = "Crime";
 const averageTot = VoteAverage(typesArray, search);
 
 
-// Funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano
+// Funzione che restituisce la lista di tutti i generi dei film, senza che questi si ripetano
 function uniqueGenres(typesArray) {
     const uniqueArray = [];
 
@@ -163,6 +164,17 @@ function uniqueGenres(typesArray) {
 }
 
 const uniqueGenresList = uniqueGenres(typesArray);
+
+
+//Creiamo una funzione che filtri i film in base ad un genere passato come argomento e ne ritorni un array con all’interno il risultato della funzione toString() di ogni film.
+
+function filterFilmByGenre(typesArray, genre) {
+    const filteredMovies = typesArray.filter(movie => movie.genre === genre).map(movie => movie.toString());
+    return filteredMovies;
+}
+
+const filter = "Science Fiction";
+const moviesFiltered = filterFilmByGenre(typesArray, filter);
 
 
 
@@ -179,5 +191,8 @@ console.log(peaky.toString());
 console.log(typesArray);
 console.log(`La media dei voti per il genere "${search}" è ${averageTot}`);
 console.log(uniqueGenresList);
+console.log(moviesFiltered);
+
+
 
 
